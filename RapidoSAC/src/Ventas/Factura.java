@@ -1,6 +1,4 @@
 package Ventas;
-
-
 import java.util.Scanner;
 
 public class Factura {
@@ -15,8 +13,6 @@ public class Factura {
 
         boolean facturar = true;
         double precioTotal = 0;
-
-
 
         StringBuilder productosyPrecio = new StringBuilder();
         System.out.println("Bienvenido a la tienda el Rápido SAC");
@@ -135,7 +131,6 @@ public class Factura {
             case "preservativos" -> precio = 3.80;
             default -> System.out.println("El producto ingresado no esta registrado.Por favor, ingrese otro.");
         }
-
 
         return precio;
     }
