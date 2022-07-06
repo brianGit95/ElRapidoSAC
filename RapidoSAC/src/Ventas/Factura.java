@@ -16,6 +16,8 @@ public class Factura {
         boolean facturar = true;
         double precioTotal = 0;
 
+
+
         StringBuilder productosyPrecio = new StringBuilder();
         System.out.println("Bienvenido a la tienda el Rápido SAC");
         System.out.println("-----------------------------------------");
