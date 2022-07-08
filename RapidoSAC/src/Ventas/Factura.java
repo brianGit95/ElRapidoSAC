@@ -1,4 +1,6 @@
 package Ventas;
+
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Factura {
@@ -13,24 +15,25 @@ public class Factura {
 
         boolean facturar = true;
         double precioTotal = 0;
+        DecimalFormat df = new DecimalFormat("#.00");
 
         StringBuilder productosyPrecio = new StringBuilder();
-        System.out.println("Bienvenido a la tienda el Rápido SAC");
-        System.out.println("-----------------------------------------");
+        System.out.println("\nSISTEMA DE FACTURACION COMERCIAL SANTA ROSA S.A.");
+        System.out.println("------------------------------------------------");
 
         while (facturar)
         {
-            double precioUnitario = 0;
+            double precioUnitario = 0.00;
             String producto = "";
 
             while (precioUnitario == 0)
             {
-                System.out.print("Ingrese el producto : ");
+                System.out.print("Nombre del Producto ? : ");
                 producto = sc.nextLine();
                 precioUnitario = precioUnitario(producto);
             }
 
-            System.out.print("Ingrese la cantidad del producto : ");
+            System.out.print("Cantidad : ");
             int cantidad = sc.nextInt();
 
             double precioProducto = precioUnitario * cantidad;
@@ -38,10 +41,10 @@ public class Factura {
 
             producto = producto.substring(0, 1).toUpperCase() + producto.substring(1);
 
-            productosyPrecio.append(producto + ", precio unitario: " + precioUnitario  + ", unidades: " + cantidad + ", precio producto: " + precioProducto);
+            productosyPrecio.append(producto + "\t\t\t\t" + cantidad + "\t\t\tS/ " + df.format(precioUnitario)+ "\t\t\tS/ " + df.format(precioProducto));
             productosyPrecio.append("\n");
 
-            System.out.print("¿Quieres continuar? (ingrese s para seguir) : ");
+            System.out.print("Continuar s/n? : ");
             String respuesta = sc.next();
 
             facturar = respuesta.equals("s");
@@ -50,12 +53,17 @@ public class Factura {
         }
 
         System.out.println();
-        System.out.println("Facturación:");
-        System.out.println("------------------------------");
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("Comercial Santa Rosa S.A.           RUC 2034102234");
+        System.out.println("--------------------------------------------------");
+        System.out.println("FACTURA No. 0023445");
+        System.out.println("--------------------------------------------------");
+        System.out.println("PRODUCTO         CANTIDAD    P. UNITARIO       SUB-TOTAL");
         System.out.println(productosyPrecio);
-        System.out.printf("El precio total sin IGV es : %.2f" ,precioTotal);
+        System.out.printf("Sub-Total :     S/ %.2f\n", precioTotal);
+        System.out.printf("IGV :           S/ %.2f\n", precioTotal*0.18);
         System.out.println();
-        System.out.printf("El precio total con IGV es : %.2f" ,precioFinalIGV(precioTotal));
+        System.out.printf("TOTAL A PAGAR : S/ %.2f" ,precioFinalIGV(precioTotal));
 
     }
 
@@ -68,7 +76,7 @@ public class Factura {
 
     static double precioUnitario(String producto)
     {
-        double precio = 0.0;
+        double precio = 0.00;
 
         switch (producto.toLowerCase())
         {
@@ -76,7 +84,7 @@ public class Factura {
             case "cafe" -> precio = 5.00;
             case "avena" -> precio = 2.50;
             case "cereales" -> precio = 6.80;
-            case "gelatina" -> precio = 3;
+            case "gelatina" -> precio = 3.00;
             case "harina" -> precio = 3.20;
             case "sal" -> precio = 1.00;
             case "mayonesa" -> precio = 2.20;
@@ -129,7 +137,7 @@ public class Factura {
             case "analgesicos" -> precio = 4.10;
             case "antigripales" -> precio = 3.40;
             case "preservativos" -> precio = 3.80;
-            default -> System.out.println("El producto ingresado no esta registrado.Por favor, ingrese otro.");
+            default -> System.out.println("El producto ingresado no esta registrado.\nPor favor, ingrese el producto nuevamente.");
         }
 
         return precio;
